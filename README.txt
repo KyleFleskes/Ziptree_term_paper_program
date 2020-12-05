@@ -1,7 +1,7 @@
 Welcome to my program!!!!
 
 What this program does is tests the actual time and space
-complexity of Ziptrees, Skiplists, and Treaps.
+complexity of Ziptrees, Skiplists, and Treaps in Python3.
 
 How this program does this is by taking in a whole positive
 number in from the command line something like: "./driver.py 100"
