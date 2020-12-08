@@ -41,7 +41,7 @@ class ZipTree:
         
         # if tree is empty, make node x the root of the tree.
         if root is None:
-            root = node(x, None, None)
+            root = node(x.getKey(), None, None)
             return x
 
         # if node's key is smaller than the root's key.
@@ -99,14 +99,23 @@ class ZipTree:
     # @return the root of the subtree after the zip.
     #
     def zip(self, x, y):
+        
+        # if tree x is empty make the rest of the tree tree y.
         if x is None:
             return y
+
+        # if tree y is empty make the rest of the tree tree x.
         if y is None:
             return x
-
+        
+        # if the root of x's rank  is  smaller than the root of y's rank
+        # merge x into y.
         if x.getRank() < y.getRank():
             y.setLeft(self.zip(x, y.getLeft()))
             return y
+        
+        # if the root of x's rank  is larger or equal to the root of y's rank
+        # merge y into x.
         else:
             x.setRight(self.zip(x.getRight(), y))
             return x
@@ -119,30 +128,56 @@ class ZipTree:
     # @return - the root of the tree after the delete.
     #
     def delete(self, x):
-        
-        #print("Removing node: ", x.getKey())
-
+    
         self.root = self.helpDelete(x, self.root)
         return self.root
-
+    
+    #
+    # The helper method to delete node x from the tree.
+    #
+    # @x - the node to delete.
+    #
+    # @return - the root of the current subtree.
+    #
+    #
     def helpDelete(self, x, root):
         
+        # If found the node, remove it by zipping x's subtrees making of tree
+        # that replaces x. 
         if x.getKey() == root.getKey():
-            return self.zip(root.left, root.right)
+            return self.zip(root.getLeft(), root.getRight())
         
+        # If root's key is greater than x's key.
         if x.getKey() < root.getKey():
+
+            # If the roots left child is node x, remove it by zipping the
+            # left child's subtrees into 1 tree that replaces x
             if x.getKey() == root.getLeft().getKey():
                 root.setLeft(self.zip(root.getLeft().getLeft(), root.getLeft().getRight()))
+            
+            # recurse left to look for node x. 
             else:
                 self.helpDelete(x, root.getLeft())
-
+        
+        # If root's key is less than x's key
         else:
+            
+            # If the roots right child is node x, remove it by zipping the
+            # right child's subtrees into 1 tree that replaces x
             if x.getKey() == root.getRight().getKey():
                 root.setRight(self.zip(root.getRight().getLeft(), root.getRight().getRight()))
+            
+            # recurse right to look for node x.
             else:
                 self.helpDelete(x, root.getRight())
+        
         return root
     
+    #
+    # Prints the current state of the tree using an inorder
+    # traversal.
+    #
+    #
     def inorderTrav(self):
         self.helpInorderTrav(self.root)
 
@@ -210,8 +245,11 @@ class ZipTree:
         
         count = sys.getsizeof(root)
         
+        # if a left subtree exists find its size.
         if root.getLeft() is not None:
             count = count + self.helpGetTreeSize(root.getLeft())
+        
+        # if a right subtree exists find its size.
         if root.getRight() is not None:
             count = count + self.helpGetTreeSize(root.getRight())
         

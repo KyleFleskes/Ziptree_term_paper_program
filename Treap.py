@@ -1,3 +1,12 @@
+#
+# Author: Huayi Zhang
+# Edited-By: Kyle Fleskes
+# Last-Modified: 12/8/2020
+#
+# This is a slightly modified code for Treaps provided on 
+# a public github by Huayi Zhang.
+# URL: https://gist.github.com/irachex/3922705
+#
 import random
 import sys
 

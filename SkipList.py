@@ -1,4 +1,12 @@
-# Python3 code for searching and deleting element in skip list 
+#
+# Author: Atul Kumar
+# Edited-By: Kyle Fleskes
+# Last-Modified: 12/8/2020
+#
+# This is a slightly modified code for Skip Lists 
+# provided by geeksfirgeeks.com
+# URL: https://www.geeksforgeeks.org/skip-list-set-3-searching-deletion/?ref=rp
+#
 
 import random 
 import sys
